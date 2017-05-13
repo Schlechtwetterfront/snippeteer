@@ -75,6 +75,7 @@ fn main() {
                 match cmd::parse(widget.get_text().unwrap()) {
                     // Paste current clipboard into the manager.
                     Ok(cmd::Command::Quit) => {
+                        widget.set_text("");
                         gtk::main_quit();
                         return Inhibit(false);
                     },
@@ -82,6 +83,7 @@ fn main() {
                         status(
                             "p [ident] / v [ident]: paste || c ident: copy || h: help || d ident: delete || m ident ident: move to".to_string()
                         );
+                        widget.set_text("");
                         return Inhibit(false);
                     },
                     Ok(cmd::Command::Paste) => {
@@ -89,6 +91,7 @@ fn main() {
 
                         if text == None {
                             status("Clipboard is empty".to_string());
+                            widget.set_text("");
                             return Inhibit(false);
                         }
 
@@ -112,6 +115,7 @@ fn main() {
 
                         if text == None {
                             status("Clipboard is empty".to_string());
+                            widget.set_text("");
                             return Inhibit(false);
                         }
 
