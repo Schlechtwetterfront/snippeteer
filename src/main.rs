@@ -69,9 +69,14 @@ fn main() {
         match key.get_keyval() {
             key::Return => {
                 match cmd::parse(widget.get_text().unwrap()) {
+                    // Paste current clipboard into the manager.
                     Ok(cmd::Command::Paste) => {
-                        // Paste current clipboard into the manager.
                         let text = gclipboard.wait_for_text();
+
+                        if text == None {
+                            status("Clipboard is empty".to_string());
+                            return Inhibit(false);
+                        }
 
                         let mut locked = clipman.lock().unwrap();
 
@@ -87,9 +92,14 @@ fn main() {
 
                         locked.add_clip(new_clip);
                     },
+                    // Paste current clipboard into the manager with an explicit name.
                     Ok(cmd::Command::PasteNamed(name)) => {
-                        // Paste current clipboard into the manager with an explicit name.
                         let text = gclipboard.wait_for_text();
+                        
+                        if text == None {
+                            status("Clipboard is empty".to_string());
+                            return Inhibit(false);
+                        }
 
                         let mut locked = clipman.lock().unwrap();
 
@@ -105,8 +115,8 @@ fn main() {
 
                         locked.add_named_clip(new_clip);
                     },
+                    // Copy entry to clipboard.
                     Ok(cmd::Command::Copy(from)) => {
-                        // Copy entry to clipboard.
                         let locked = clipman.lock().unwrap();
 
                         if let Some(ref clip) = locked.clip(from.clone()) {
