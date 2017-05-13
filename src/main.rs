@@ -67,9 +67,23 @@ fn main() {
         use gdk::enums::key;
 
         match key.get_keyval() {
+            key::Escape => {
+                widget.set_text("");
+                Inhibit(false)
+            },
             key::Return => {
                 match cmd::parse(widget.get_text().unwrap()) {
                     // Paste current clipboard into the manager.
+                    Ok(cmd::Command::Quit) => {
+                        gtk::main_quit();
+                        return Inhibit(false);
+                    },
+                    Ok(cmd::Command::Help) => {
+                        status(
+                            "p [ident] / v [ident]: paste || c ident: copy || h: help || d ident: delete || m ident ident: move to".to_string()
+                        );
+                        return Inhibit(false);
+                    },
                     Ok(cmd::Command::Paste) => {
                         let text = gclipboard.wait_for_text();
 
@@ -95,7 +109,7 @@ fn main() {
                     // Paste current clipboard into the manager with an explicit name.
                     Ok(cmd::Command::PasteNamed(name)) => {
                         let text = gclipboard.wait_for_text();
-                        
+
                         if text == None {
                             status("Clipboard is empty".to_string());
                             return Inhibit(false);
@@ -132,7 +146,7 @@ fn main() {
                     Ok(cmd::Command::Move(from, to)) => {
                         status(format!("Moved {:?} to {:?}", from, to));
                     },
-                    Err(e) => println!("{:?}", e),
+                    Err(e) => status(format!("{}: {}", e, widget.get_text().unwrap())),
                 }
 
                 widget.set_text("");

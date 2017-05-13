@@ -4,6 +4,8 @@
 
 pub enum Command {
     Paste,
+    Help,
+    Quit,
     PasteNamed(String),
     Copy(String),
     Delete(String),
@@ -30,6 +32,8 @@ pub fn parse(cmd: String) -> Result<Command, String> {
         1 => {
             match pieces[0] {
                 "p" | "v" => Ok(Command::Paste),
+                "help" | "h" | "?" => Ok(Command::Help),
+                "quit" | "q" => Ok(Command::Quit),
                 _ => Err(String::from("Invalid 1 part command")),
             }
         }
