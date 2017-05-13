@@ -34,9 +34,9 @@ pub struct ClipView {
 
 impl ClipView {
     pub fn with_tree(tree: TreeView) -> Self {
-        add_column(&tree, 0, "ID");
-        add_column(&tree, 1, "Created");
-        add_column(&tree, 2, "Content");
+        // add_column(&tree, 0, "ID");
+        // add_column(&tree, 1, "Created");
+        // add_column(&tree, 2, "Content");
 
         let selection = tree.get_selection();
         selection.set_mode(SelectionMode::None);
@@ -71,7 +71,7 @@ impl ClipView {
             &[0, 1, 2],
             &[
                 // This is horrible but needed (?) to convert from String to &str.
-                &&clip.key().unwrap()[..],
+                &format!("<b>{}</b>", clip.key().unwrap()),
                 &clip.created().format("%H:%M:%S").to_string(),
                 // This is horrible but needed (?) to convert from String to &str.
                 &&formatted_string[..],
