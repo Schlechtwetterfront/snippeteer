@@ -1,0 +1,29 @@
+* {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#input_box {
+    margin: 8px 20px;
+    border: none;
+    font-size: 120%;
+}
+
+.box_trees {
+    margin: 6px 20px 12px;
+}
+
+.tree {
+    background: transparent;
+    margin: 0 20px;
+}
+
+.heading {
+    font-size: 24px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    margin: 0 10px;
+}
+
+.status_label {
+    margin: 4px 10px 10px;
+}

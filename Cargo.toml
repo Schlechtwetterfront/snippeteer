@@ -1,0 +1,12 @@
+[package]
+name = "snippeteer"
+version = "0.1.0"
+authors = ["Benedikt Schatz <schlchtwtrfrnt@gmail.com>"]
+
+[dependencies]
+chrono = "0.3"
+gdk = "*"
+
+[dependencies.gtk]
+version = "*"
+features = ["v3_16"]
