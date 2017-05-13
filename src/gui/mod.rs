@@ -71,10 +71,10 @@ impl ClipView {
             &[0, 1, 2],
             &[
                 // This is horrible but needed (?) to convert from String to &str.
-                &format!("<b>{}</b>", clip.key().unwrap()),
+                &clip.key().unwrap(),
                 &clip.created().format("%H:%M:%S").to_string(),
                 // This is horrible but needed (?) to convert from String to &str.
-                &&formatted_string[..],
+                &formatted_string,
             ]
         );
         self.tree.set_model(Some(&self.model));
