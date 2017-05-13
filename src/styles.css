@@ -3,13 +3,13 @@
 }
 
 #input_box {
-    margin: 8px 20px;
+    margin: 8px 10px;
     border: none;
     font-size: 120%;
 }
 
 .box_trees {
-    margin: 6px 20px 12px;
+    margin: 6px 10px 12px;
 }
 
 .tree {
@@ -18,7 +18,7 @@
 }
 
 .heading {
-    font-size: 24px;
+    font-size: 20px;
     padding-bottom: 6px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
     margin: 0 10px;
@@ -26,4 +26,48 @@
 
 .status_label {
     margin: 4px 10px 10px;
+}
+
+.titlebar {
+    /*border-radius: 0;*/
+    border: 0;
+    padding: 0;
+    outline: none;
+    background: white;
+}
+
+.titlebar:backdrop {
+    background: #eee;
+}
+
+.titlebar box {
+
+}
+
+.titlebar button {
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    outline: 0;
+    min-height: 28px;
+    min-width: 40px;
+    transition-duration: .1s;
+}
+
+.titlebar button.close {
+    border-top-right-radius: 5px;
+}
+
+.titlebar button:hover {
+    background: rgba(0, 0, 0, .1);
+}
+
+.titlebar button.close:hover {
+    background: rgba(255, 0, 0, .5);
+}
+
+window {
+    background: #eee;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
