@@ -140,14 +140,26 @@ fn main() {
                         if let Some(ref clip) = locked.clip(from.clone()) {
                             gclipboard.set_text(&clip.content());
                             status(format!("Copied clipboard into {:?}", from));
+                        } else if let Some(ref clip) = locked.named_clip(from.clone()) {
+                            gclipboard.set_text(&clip.content());
+                            status(format!("Copied clipboard into {:?}", from));
                         } else {
                             status(format!("Could not find clip {}", from));
                         }
                     },
                     Ok(cmd::Command::Delete(id)) => {
-                        status(format!("Deleted clip {:?}", id));
+                        let mut locked = clipman.lock().unwrap();
+
+                        if locked.remove_clip(id.clone()) {
+                            status(format!("Deleted clip {:?}", id));
+                        } else if locked.remove_named_clip(id.clone()) {
+                            status(format!("Deleted clip {:?}", id));
+                        } else {
+                            status(format!("Could not find clip {}", id));
+                        }
                     },
                     Ok(cmd::Command::Move(from, to)) => {
+
                         status(format!("Moved {:?} to {:?}", from, to));
                     },
                     Err(e) => status(format!("{}: {}", e, widget.get_text().unwrap())),

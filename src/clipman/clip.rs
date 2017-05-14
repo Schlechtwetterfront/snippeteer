@@ -1,5 +1,6 @@
 use chrono::prelude::*;
 
+#[derive(Clone)]
 pub struct Clip {
     created: DateTime<Local>,
     modified: DateTime<Local>,

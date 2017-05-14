@@ -48,4 +48,20 @@ impl ClipManager {
     pub fn named_clip(&self, key: String) -> Option<&Clip> {
         self.named_clips.get(&key)
     }
-}
+
+    pub fn remove_clip(&mut self, key: String) -> bool {
+        if let Some(_) = self.clips.remove(&key) {
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn remove_named_clip(&mut self, key: String) -> bool {
+        if let Some(_) = self.named_clips.remove(&key) {
+            true
+        } else {
+            false
+        }        
+    }
+ }
