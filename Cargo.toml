@@ -5,8 +5,8 @@ authors = ["Benedikt Schatz <schlchtwtrfrnt@gmail.com>"]
 
 [dependencies]
 chrono = "0.3"
-gdk = "*"
+gdk = "0.11.0"
 
 [dependencies.gtk]
-version = "*"
+version = "0.7.0"
 features = ["v3_16"]

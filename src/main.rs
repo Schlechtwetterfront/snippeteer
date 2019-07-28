@@ -72,7 +72,7 @@ fn main() {
                 Inhibit(false)
             },
             key::Return => {
-                match cmd::parse(widget.get_text().unwrap()) {
+                match cmd::parse(widget.get_text().unwrap().to_string()) {
                     // Paste current clipboard into the manager.
                     Ok(cmd::Command::Quit) => {
                         widget.set_text("");
@@ -100,7 +100,7 @@ fn main() {
                         let new_clip = locked
                             .new_clip()
                             .title(String::from("clip"))
-                            .content(text.unwrap())
+                            .content(text.unwrap().to_string())
                             .build();
 
                         clip_view.lock().unwrap().add_clip(&new_clip);
@@ -124,7 +124,7 @@ fn main() {
                         let new_clip = ClipBuilder::new()
                             .title(String::from("clip"))
                             .key(name)
-                            .content(text.unwrap())
+                            .content(text.unwrap().to_string())
                             .build();
 
                         named_clip_view.lock().unwrap().add_clip(&new_clip);
